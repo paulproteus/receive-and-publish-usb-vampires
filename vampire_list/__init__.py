@@ -1,6 +1,8 @@
 import bottle
 import os
 import glob
+import tempfile
+import tarfile
 
 MAGIC_STRING = "Save us from vampires"
 
@@ -46,7 +48,23 @@ def read_index():
         s += '<li><a href="/read/%d">%d</a></li>' % (
             thing, thing)
     s += "</ul>"
+    s += '<p>Or, <a href="/tarball/">get a tarball</a>.</p>'
     return s
+
+@bottle.route('/tarball/')
+def tarball():
+    ## Create tar file
+    filename = tempfile.NamedTemporaryFile(delete=False).name
+    tar = tarfile.open(filename, "w:gz")
+    for txtpath in sorted(glob.glob(get_data_path() + "/*/txt")):
+        number = txtpath.rsplit('/', 2)[1]
+        tar.add(txtpath, arcname=number + ".txt")
+    tar.close()
+
+    ## Horrible (-: Return it to the user
+    with open(filename) as fd:
+        bottle.response.set_header('Content-Type', 'application/x-tar')
+        return fd.read()
 
 @bottle.route('/read/:number')
 def read(number=None):
