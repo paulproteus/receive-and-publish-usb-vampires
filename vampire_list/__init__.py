@@ -4,11 +4,17 @@ import glob
 
 MAGIC_STRING = "Save us from vampires"
 
+def get_data_path():
+    return os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            '..', 'data'))
+
 def find_next_available_data_path(i_start=0):
     i = i_start
     while True:
         try:
-            os.mkdir("data/%d" % (i,))
+            os.mkdir(get_data_path()+ "/%d" % (i,))
             # Yay, it worked! Return.
             return i
         except OSError, e:
@@ -26,14 +32,14 @@ def submit():
         return bottle.abort(403, "Missing magic string")
 
     num = find_next_available_data_path()
-    with open("data/%d/txt" % (num,), 'w') as fd:
+    with open(get_data_path() + "/%d/txt" % (num,), 'w') as fd:
         fd.write(s)
     return "Saved as number %d" % (num,)
 
 @bottle.route('/read/')
 def read_index():
-    things = sorted([int(x.split('/')[1])
-                     for x in glob.glob("data/*/txt")])
+    things = sorted([int(x.rsplit('/', 2)[1])
+                     for x in glob.glob(get_data_path() + "/*/txt")])
     s = "<ul>"
     for thing in things:
         s += '<li><a href="/read/%d">%d</a></li>' % (
@@ -44,7 +50,7 @@ def read_index():
 @bottle.route('/read/:number')
 def read(number=None):
     n = int(number)
-    path = "data/%d/txt" % (n,)
+    path = get_data_path() + "/%d/txt" % (n,)
     if not os.path.exists(path):
         return bottle.abort(404)
     bottle.response.set_header('Content-Type', 'text/plain')
