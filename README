@@ -46,6 +46,8 @@ MONITORING:
 Since this provides an active web service, it's helpful to know if the 
 service is working.
 
+There should be a URL here for where you can check if the service is up.
+
 LICENSING:
 
 CC Zero.
