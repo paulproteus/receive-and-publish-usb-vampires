@@ -62,3 +62,5 @@ def home():
 
 if __name__ == '__main__':
     bottle.run(host='localhost', port=8080)
+
+application = bottle.default_app()
