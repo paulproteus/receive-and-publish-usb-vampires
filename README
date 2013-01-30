@@ -1,0 +1,51 @@
+GOAL:
+
+This code: Receive and publish notes from Linux USB users who want to 
+share their testing results on if USB devices have proper power 
+management.
+
+Overall: Improve the Linux community's ability to configure USB power 
+management.
+
+WHAT IT DOES:
+
+This code does the following very simple things:
+
+* Runs a service that accepts notes from users.
+
+* Publishes a tarball of those notes.
+
+HOW IT DOES ABUSE FILTERING:
+
+* It checks for a special string in the submitted input.
+
+PRIVACY IMPLICATIONS:
+
+* FIXME...
+
+SAMPLE SUBMIT SCRIPT:
+
+* Provided as sample_submit.py.
+
+WHAT IT IS NOT FOR:
+
+The plan is that this code (on the web) will only receive, store, and 
+publish the notes from users.
+
+Any analysis scripts should be run elsewhere. (That way, I don't have to 
+personally manage deploying them.)
+
+CONTRIBUTING:
+
+https://github.com/paulproteus/receive-and-publish-usb-vampires
+
+I should put more docs here.
+
+MONITORING:
+
+Since this provides an active web service, it's helpful to know if the 
+service is working.
+
+LICENSING:
+
+CC Zero.
