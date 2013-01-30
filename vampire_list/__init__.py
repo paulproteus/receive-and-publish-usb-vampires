@@ -34,7 +34,8 @@ def submit():
     num = find_next_available_data_path()
     with open(get_data_path() + "/%d/txt" % (num,), 'w') as fd:
         fd.write(s)
-    return "Saved as number %d" % (num,)
+    return bottle.redirect("/read/%d" % (
+            num,))
 
 @bottle.route('/read/')
 def read_index():
