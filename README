@@ -1,10 +1,10 @@
 GOAL:
 
-This code: Receive and publish notes from Linux USB users who want to 
-share their testing results on if USB devices have proper power 
+This code: Receive and publish notes from Linux USB users who want to
+share their testing results on if USB devices have proper power
 management.
 
-Overall: Improve the Linux community's ability to configure USB power 
+Overall: Improve the Linux community's ability to configure USB power
 management.
 
 WHAT IT DOES:
@@ -29,11 +29,11 @@ SAMPLE SUBMIT SCRIPT:
 
 WHAT IT IS NOT FOR:
 
-The plan is that this code (on the web) will only receive, store, and 
+The plan is that this code (on the web) will only receive, store, and
 publish the notes from users.
 
-Any analysis scripts should be run elsewhere. (That way, I don't have to 
-personally manage deploying them.)
+Any analysis scripts should be run elsewhere. (That way, I don't have
+to personally manage deploying them.)
 
 CONTRIBUTING:
 
@@ -41,9 +41,17 @@ https://github.com/paulproteus/receive-and-publish-usb-vampires
 
 I should put more docs here.
 
+RUNNING THE CODE:
+
+virtualenv .
+./bin/python setup.py develop
+./bin/python vampire_list/__init__.py
+
+Now you have the service listening on localhost:8080.
+
 MONITORING:
 
-Since this provides an active web service, it's helpful to know if the 
+Since this provides an active web service, it's helpful to know if the
 service is working.
 
 There should be a URL here for where you can check if the service is up.
